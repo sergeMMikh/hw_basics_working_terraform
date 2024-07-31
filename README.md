@@ -44,9 +44,20 @@
     secret_key = var.secret_key
     }
 ``` 
-2. Создал *Key pair*
+2. Создал *Key pair*</br>
    <img src="images/Task_1_1.png" alt="Task_1_1.png" width="550" height="auto">
    
 4. Так как ключ был сгенерирован на AWS, то открытой части получить не удастся.
 5. Предложенные в задании характеристики ВМ соответствуют инстансу *t2.micro* на Amazon. *boot_disk* аналогичен  *gp2*. Вместо *metadata* использовал *tags*.
 6. Для разрешения портов доступа к ВМ использовал *security_group*.
+7. Что бы уменьшить задержку в обновлении добавил
+```
+lifecycle {
+    create_before_destroy = true
+  }
+```
+
+8. После запуска получаем инстанс с такими пораметрами:</br>
+  <img src="images/Task_1_2.png" alt="Task_1_2.png" width="400" height="auto"></br>
+  В сервисе EC2 AWS можно отследить параметры ВМ</br>
+  <img src="images/Task_1_3.png" alt="Task_1_3.png" width="750" height="auto"></br>
