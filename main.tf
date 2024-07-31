@@ -28,26 +28,16 @@ resource "aws_subnet" "develop" {
 
 }
 
-# Get a latest ubuntu version in current region
-data "aws_ami" "latest_ubuntu" {
-  owners      = ["099720109477"]
-  most_recent = true
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-arm64-server-*"]
-  }
-}
-
 resource "aws_instance" "platform" {
-  count = 1
-  ami = data.aws_ami.latest_ubuntu.id
+  count         = 1
+  ami           = "ami-0e872aee57663ae2d"
   instance_type = "t2.micro"
 
   key_name = var.key_name
 
   root_block_device {
     volume_type = "gp2"
-    volume_size = 8 
+    volume_size = 8
   }
 
   availability_zone = var.availability_zone
