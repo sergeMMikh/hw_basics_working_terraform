@@ -32,3 +32,21 @@
 - скриншот ЛК Yandex Cloud с созданной ВМ, где видно внешний ip-адрес;
 - скриншот консоли, curl должен отобразить тот же внешний ip-адрес;
 - ответы на вопросы.
+
+---
+**Решение**
+
+1. Изменил файл *providers.tf* под нужды aws:
+```
+    provider "aws" {
+    region = var.region
+    access_key = var.access_key
+    secret_key = var.secret_key
+    }
+``` 
+2. Создал *Key pair*
+   <img src="images/Task_1_1.png" alt="Task_0_2.png" width="550" height="auto">
+   
+4. Так как ключ был сгенерирован на AWS, то открытой части получить не удастся.
+5. Предложенные в задании характеристики ВМ соответствуют инстансу *t2.micro* на Amazon. *boot_disk* аналогичен  *gp2*. Вместо *metadata* использовал *tags*.
+6. Для разрешения портов доступа к ВМ использовал *security_group*.
