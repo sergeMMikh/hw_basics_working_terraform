@@ -9,7 +9,7 @@ resource "aws_security_group" "external_net" {
 
   ## This is an internal network identification. It is not needed for now.
   ## Without this part, AWS uses a default internal network.
-  #   vpc_id      = aws_default_vpc.default.id 
+  vpc_id = aws_vpc.develop.id
 
   # Incoming trafic
   dynamic "ingress" {
@@ -20,6 +20,13 @@ resource "aws_security_group" "external_net" {
       protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
     }
+  }
+
+  ingress {
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   # Out trafic
@@ -69,4 +76,33 @@ resource "aws_security_group" "internal_net" {
     Owner   = "SMMikh"
     Project = "Course Work. DevOps Engineer."
   }
+
+  vpc_id = aws_vpc.develop.id
 }
+
+resource "aws_internet_gateway" "develop" {
+  vpc_id = aws_vpc.develop.id
+
+  tags = {
+    Name = "develop"
+  }
+}
+
+resource "aws_route_table" "develop" {
+  vpc_id = aws_vpc.develop.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.develop.id
+  }
+
+  tags = {
+    Name = "develop"
+  }
+}
+
+resource "aws_route_table_association" "develop" {
+  subnet_id      = aws_subnet.develop.id
+  route_table_id = aws_route_table.develop.id
+}
+
