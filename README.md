@@ -56,8 +56,11 @@ lifecycle {
     create_before_destroy = true
   }
 ```
-
+8. Штатный подход AWS к формированию сетей заключается в использовании дефолной сети по умолчанию. При этом выдаётся некий дефолтный диаппазон адресов. Для выполнения задния в сети *10.0.1.0/24* пришлось создавать *gateway* с таблицей маршрутизациию
 8. После запуска получаем инстанс с такими пораметрами:</br>
-  <img src="images/Task_1_2.png" alt="Task_1_2.png" width="400" height="auto"></br>
+  <img src="images/Task_1_2_.png" alt="Task_1_2.png" width="400" height="auto"></br>
   В сервисе EC2 AWS можно отследить параметры ВМ</br>
-  <img src="images/Task_1_3.png" alt="Task_1_3.png" width="750" height="auto"></br>
+  <img src="images/Task_1_3_.png" alt="Task_1_3.png" width="750" height="auto"></br>
+  Публичный адрес при этом пингуется</br>
+  <img src="images/Task_1_4.png" alt="Task_1_4.png" width="400" height="auto"></br>
+
