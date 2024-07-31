@@ -8,7 +8,7 @@
 #   v4_cidr_blocks = var.default_cidr
 # }
 
-resource "aws_vpc" "main" {
+resource "aws_vpc" "develop" {
   cidr_block       = var.default_cidr
   instance_tenancy = "default"
 
@@ -22,11 +22,20 @@ resource "aws_subnet" "develop" {
     Name = var.vpc_name
   }
 
-  vpc_id            = aws_vpc.main.id
+  vpc_id            = aws_vpc.develop.id
   cidr_block        = var.default_cidr
   availability_zone = var.availability_zone
 
 }
+
+# resource "aws_network_interface" "ptfom" {
+#   subnet_id   = aws_subnet.develop.id
+#   private_ips = ["10.0.1.10"]
+
+#   tags = {
+#     Name = "primary_network_interface"
+#   }
+# }
 
 resource "aws_instance" "platform" {
   count         = 1
@@ -49,13 +58,18 @@ resource "aws_instance" "platform" {
   }
 
   vpc_security_group_ids = [
-    aws_security_group.external_net.id
+    aws_security_group.external_net.id,
+    aws_security_group.internal_net.id,
   ]
 
   # network_interface {
-  #   subnet_id         = aws_subnet.develop.id
-  #   associate_public_ip_address = true
+  #   network_interface_id = aws_network_interface.ptfom.id
+  #   device_index         = 0
   # }
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 
