@@ -16,6 +16,18 @@ variable "secret_key" {
   sensitive   = true
 }
 
+variable "key_name"{
+  type = string
+  description = "The Key pair name"
+  sensitive   = true
+}
+
+variable "availability_zone" {
+  description = "The AWS availability zone"
+  type        = string
+  default     = "eu-central-1a" 
+}
+
 # ###cloud vars
 # variable "token" {
 #   type        = string
@@ -37,17 +49,18 @@ variable "secret_key" {
 #   default     = "ru-central1-a"
 #   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 # }
-# variable "default_cidr" {
-#   type        = list(string)
-#   default     = ["10.0.1.0/24"]
-#   description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
-# }
 
-# variable "vpc_name" {
-#   type        = string
-#   default     = "develop"
-#   description = "VPC network & subnet name"
-# }
+variable "default_cidr" {
+  type        = string
+  default     = "10.0.1.0/24"
+  description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
+}
+
+variable "vpc_name" {
+  type        = string
+  default     = "develop"
+  description = "VPC network & subnet name"
+}
 
 
 # ###ssh vars
