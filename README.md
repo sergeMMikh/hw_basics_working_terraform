@@ -45,7 +45,7 @@
     }
 ``` 
 2. Создал *Key pair*
-   <img src="images/Task_1_1.png" alt="Task_0_2.png" width="550" height="auto">
+   <img src="images/Task_1_1.png" alt="Task_1_1.png" width="550" height="auto">
    
 4. Так как ключ был сгенерирован на AWS, то открытой части получить не удастся.
 5. Предложенные в задании характеристики ВМ соответствуют инстансу *t2.micro* на Amazon. *boot_disk* аналогичен  *gp2*. Вместо *metadata* использовал *tags*.
