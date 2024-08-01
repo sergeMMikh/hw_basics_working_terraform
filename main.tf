@@ -37,12 +37,12 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "platform" {
   count         = 1
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
+  instance_type = var.vm_web_instance_type
 
   key_name = var.key_name
 
   root_block_device {
-    volume_type = "gp2"
+    volume_type = var.vm_web_volume_type
     volume_size = 8
   }
 
@@ -52,9 +52,9 @@ resource "aws_instance" "platform" {
   availability_zone = var.availability_zone
 
   tags = {
-    Name    = "netology-develop-platform-web"
-    Owner   = "SMMikh"
-    Project = "hw_basics_working_terraform."
+    Name    = var.vm_web_name
+    Owner   = var.vm_web_owner
+    Project = var.vm_web_project
   }
 
   vpc_security_group_ids = [
