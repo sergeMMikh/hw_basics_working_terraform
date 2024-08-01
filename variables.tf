@@ -28,58 +28,10 @@ variable "availability_zone" {
   default     = "eu-central-1a"
 }
 
-variable "vm_web_name" {
-  type        = string
-  description = "The image name"
-  default     = "netology-develop-platform-web"
-}
-
-variable "vm_web_instance_type" {
-  type        = string
-  description = "The type of instance"
-  default     = "t2.micro"
-}
-
-variable "vm_web_volume_type" {
-  type        = string
-  description = "The type disc"
-  default     = "gp2"
-}
-
-variable "vm_web_owner" {
-  type        = string
-  description = "The type disc"
-  default     = "SMMikh"
-}
-
-variable "vm_web_project" {
-  type        = string
-  description = "The type disc"
-  default     = "hw_basics_working_terraform."
-}
-
-
-
-# ###cloud vars
-# variable "token" {
+# variable "availability_zone_db" {
+#   description = "The AWS availability zone"
 #   type        = string
-#   description = "OAuth-token; https://cloud.yandex.ru/docs/iam/concepts/authorization/oauth-token"
-# }
-
-# variable "cloud_id" {
-#   type        = string
-#   description = "https://cloud.yandex.ru/docs/resource-manager/operations/cloud/get-id"
-# }
-
-# variable "folder_id" {
-#   type        = string
-#   description = "https://cloud.yandex.ru/docs/resource-manager/operations/folder/get-id"
-# }
-
-# variable "default_zone" {
-#   type        = string
-#   default     = "ru-central1-a"
-#   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
+#   default     = "eu-central-1b"
 # }
 
 variable "default_cidr" {
@@ -94,6 +46,29 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
+# variable "subnet_cidr_a" {
+#   type        = string
+#   default     = "10.0.1.0/28"
+#   description = "CIDR block for the subnet in eu-central-1a"
+# }
+
+# variable "subnet_cidr_b" {
+#   type        = string
+#   default     = "10.0.1.16/28"
+#   description = "CIDR block for the subnet in eu-central-1b"
+# }
+
+# variable "availability_zone_a" {
+#   type        = string
+#   default     = "eu-central-1a"
+#   description = "The AWS availability zone for the first instance"
+# }
+
+# variable "availability_zone_b" {
+#   type        = string
+#   default     = "eu-central-1b"
+#   description = "The AWS availability zone for the second instance"
+# }
 
 # ###ssh vars
 

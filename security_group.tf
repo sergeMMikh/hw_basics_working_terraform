@@ -106,3 +106,12 @@ resource "aws_route_table_association" "develop" {
   route_table_id = aws_route_table.develop.id
 }
 
+# resource "aws_route_table_association" "develop_a" {
+#   subnet_id      = aws_subnet.develop_a.id
+#   route_table_id = aws_route_table.develop.id
+# }
+
+# resource "aws_route_table_association" "develop_b" {
+#   subnet_id      = aws_subnet.develop_b.id
+#   route_table_id = aws_route_table.develop.id
+# }
