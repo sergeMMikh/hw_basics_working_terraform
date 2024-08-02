@@ -101,7 +101,7 @@ lifecycle {
 3. Результат запуска</br>
    <img src="images/Task_3_2.png" alt="Task_3_2.png" width="350" height="auto"></br>
    <img src="images/Task_3_3.png" alt="Task_3_3.png" width="750" height="auto"></br>
-4. Решаем проблему с разными зонами. К сожилению, на AWS вопрос размещения ВМ в разных зонях требует подвига. Но всегда есть достаточно простое штатное решние- использование [дефолтной VPC](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_vpc.html). Данная зона описана в файле [*av_zones.tf*](av_zones.tf) В итоге имеем красивый вариант двух машин работающих в разных зонах и даже с DNS именами:</br>
+4. Решаем проблему с разными зонами. К сожалению, на AWS вопрос размещения ВМ в разных зонях требует подвига. Но всегда есть достаточно простое штатное решние- использование [дефолтной VPC](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_vpc.html). Данная зона описана в файле [*av_zones.tf*](av_zones.tf) В итоге имеем красивый вариант двух машин работающих в разных зонах и даже с DNS именами:</br>
    <img src="images/Task_3_4.png" alt="Task_3_4.png" width="350" height="auto"></br>
 5. Проверяем пинг между машинами по внутренней сети:</br>
    <img src="images/Task_3_5.png" alt="Task_3_5.png" width="350" height="auto"></br>
