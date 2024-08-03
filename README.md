@@ -136,5 +136,11 @@ lifecycle {
 ---
 
 **Решение**
+1. В файле locals.tf сделал переменную с полным описанием проека.
+2. Сделал для неё output
+3. Вывод значений команды ```terraform output```</br>
+   <img src="images/Task_5_1.png" alt="Task_5_1.png" width="750" height="auto"></br>
+   Описание проекта на странице инстанса AWS
+   <img src="images/Task_5_2.png" alt="Task_5_2.png" width="750" height="auto"></br>
 
 
