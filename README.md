@@ -231,3 +231,31 @@ locals {
 5. По условиям задания я должен закоментировать все неиспользуемые теперь переменные, а именно те, что внесены в новые *map*. Однако я использую данные переменные в других ресурсах aws, включенных в проект. Например у меня есть таги в описании [*aws_security_group*](security_group.tf).
 6. Я имел неосторожность использовать данные из *tags* в [output](outputs.tf) потому вывод команды *terraform plan* написал мне изменение в *Changes to Outputs*.</br>
    <img src="images/Task_6_1.png" alt="Task_6_1.png" width="350" height="auto"></br>
+
+-----
+### Задание 7*
+
+Изучите содержимое файла console.tf. Откройте terraform console, выполните следующие задания: 
+
+1. Напишите, какой командой можно отобразить **второй** элемент списка test_list.
+2. Найдите длину списка test_list с помощью функции length(<имя переменной>).
+3. Напишите, какой командой можно отобразить значение ключа admin из map test_map.
+4. Напишите interpolation-выражение, результатом которого будет: "John is admin for production server based on OS ubuntu-20-04 with X vcpu, Y ram and Z virtual disks", используйте данные из переменных test_list, test_map, servers и функцию length() для подстановки значений.
+
+**Примечание**: если не догадаетесь как вычленить слово "admin", погуглите: "terraform get keys of map"
+
+В качестве решения предоставьте необходимые команды и их вывод.
+
+---
+
+**Решение**
+1. Второй элемент достаётся из переменной по ндексу
+   ```length(local.test_list)```
+2. Длину списка *test_list* с помощью функции *length* получаем:
+   ```local.test_map["admin"]```
+3. Pначение ключа admin из map test_map достаём так:
+   ```local.test_map["admin"]```
+4. interpolation-выражение:
+   ```"${local.test_map["admin"]} is admin for production server based on OS ${local.servers.production.image} with ${local.servers.production.cpu} vcpu, ${local.servers.production.ram} ram and ${length(local.servers.production.disks)} virtual disks"```
+5. Скрин вывода всех запросов к консоли</br>
+   <img src="images/Task_7_1.png" alt="Task_6_1.png" width="400" height="auto"></br>
