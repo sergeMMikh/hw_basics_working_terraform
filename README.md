@@ -259,3 +259,37 @@ locals {
    ```"${local.test_map["admin"]} is admin for production server based on OS ${local.servers.production.image} with ${local.servers.production.cpu} vcpu, ${local.servers.production.ram} ram and ${length(local.servers.production.disks)} virtual disks"```
 5. Скрин вывода всех запросов к консоли</br>
    <img src="images/Task_7_1.png" alt="Task_6_1.png" width="400" height="auto"></br>
+
+-----
+
+### Задание 8*
+1. Напишите и проверьте переменную test и полное описание ее type в соответствии со значением из terraform.tfvars:
+```
+test = [
+  {
+    "dev1" = [
+      "ssh -o 'StrictHostKeyChecking=no' ubuntu@62.84.124.117",
+      "10.0.1.7",
+    ]
+  },
+  {
+    "dev2" = [
+      "ssh -o 'StrictHostKeyChecking=no' ubuntu@84.252.140.88",
+      "10.0.2.29",
+    ]
+  },
+  {
+    "prod1" = [
+      "ssh -o 'StrictHostKeyChecking=no' ubuntu@51.250.2.101",
+      "10.0.1.30",
+    ]
+  },
+]
+```
+2. Напишите выражение в terraform console, которое позволит вычленить строку "ssh -o 'StrictHostKeyChecking=no' ubuntu@62.84.124.117" из этой переменной.
+
+---
+
+**Решение**
+Выражение в terraform console, которое позволит вычленить требуемую строку: ```var.test[0]["dev1"][0]</br>
+   <img src="images/Task_8_1.png" alt="Task_8_1.png" width="400" height="auto"></br>
