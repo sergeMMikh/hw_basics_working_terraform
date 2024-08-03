@@ -1,6 +1,6 @@
 resource "aws_security_group" "external_net" {
-  name        = "Web Server Sequrity Group"
-  description = "allow ssh on 22 & http on port 80 & backend on 8001 && frontend on 8080"
+  name        = "HW External Sequrity Group"
+  description = "allow ssh on 22 & http on port 80 & http on port 443"
 
   ## This is an internal network identification. It is not needed for now.
   ## Without this part, AWS uses a default internal network.
@@ -34,15 +34,15 @@ resource "aws_security_group" "external_net" {
   }
 
   tags = {
-    Name    = "Web Server Sequrity Group"
+    Name    = "HW External Sequrity Group"
     Owner   = var.vm_web_owner
     Project = var.vm_web_project
   }
 }
 
 resource "aws_security_group" "internal_net" {
-  name        = "Internal Sequrity Group"
-  description = "allow ssh on 22 & http on port 80 & backend on 8001 && frontend on 8080"
+  name        = "HW Internal Sequrity Group"
+  description = "allow ssh on 22 & http on port 80 & http on port 443"
 
   ## This is an internal network identification. It is not needed for now.
   ## Without this part, AWS uses a default internal network.
@@ -67,7 +67,7 @@ resource "aws_security_group" "internal_net" {
   }
 
   tags = {
-    Name    = "internal Sequrity Group"
+    Name    = "HW Internal connections"
     Owner   = var.vm_web_owner
     Project = var.vm_web_project
   }
@@ -82,21 +82,3 @@ resource "aws_internet_gateway" "develop" {
     Name = "develop"
   }
 }
-
-# resource "aws_route_table" "develop" {
-#   vpc_id = aws_vpc.develop.id
-
-#   route {
-#     cidr_block = "0.0.0.0/0"
-#     gateway_id = aws_internet_gateway.develop.id
-#   }
-
-#   tags = {
-#     Name = "develop"
-#   }
-# }
-
-# resource "aws_route_table_association" "develop" {
-#   subnet_id      = aws_subnet.develop.id
-#   route_table_id = aws_route_table.develop.id
-# }
