@@ -39,3 +39,32 @@ variable "vm_web_project" {
   description = "The type disc"
   default     = "hw_basics_working_terraform."
 }
+
+variable "vms_resources" {
+  type = map(any)
+  default = {
+    web = {
+      Platform = "Ubuntu"
+      cores    = "1"
+      memory   = "1G"
+      hdd_size = "8G"
+      hdd_type = "gp2"
+    }
+    db = {
+      Platform = "Ubuntu"
+      cores    = "2"
+      memory   = "2G"
+      hdd_size = "8G"
+      hdd_type = "gp2"
+    }
+  }
+}
+
+variable "metadata" {
+  type = map(any)
+  default = {
+    Owner    = "SMMikh"
+    Project  = "hw_basics_working_terraform."
+    Platform = "Ubuntu"
+  }
+}
