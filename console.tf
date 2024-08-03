@@ -30,3 +30,21 @@ locals {
   }
 }
 
+
+locals {
+  dev1_ssh_command  = var.test[0]["dev1"][0]
+  dev2_internal_ip  = var.test[1]["dev2"][1]
+  prod1_ssh_command = var.test[2]["prod1"][0]
+}
+
+output "dev1_ssh_command" {
+  value = local.dev1_ssh_command
+}
+
+output "dev2_internal_ip" {
+  value = local.dev2_internal_ip
+}
+
+output "prod1_ssh_command" {
+  value = local.prod1_ssh_command
+}
