@@ -18,9 +18,10 @@ resource "aws_instance" "platform" {
   availability_zone = data.aws_availability_zones.available.names[0]
 
   tags = {
-    Name    = var.vm_web_name
-    Owner   = var.vm_web_owner
-    Project = var.vm_web_project
+    Name                     = var.vm_web_name
+    Owner                    = var.vm_web_owner
+    Project                  = var.vm_web_project
+    full_project_description = local.full_project_description
   }
 
   vpc_security_group_ids = [
@@ -53,9 +54,10 @@ resource "aws_instance" "netology-develop-platform-db" {
   availability_zone = data.aws_availability_zones.available.names[1]
 
   tags = {
-    Name    = var.vm_web_db_name
-    Owner   = var.vm_web_owner
-    Project = var.vm_web_project
+    Name                     = var.vm_db_name
+    Owner                    = var.vm_web_owner
+    Project                  = var.vm_web_project
+    full_project_description = local.full_project_description
   }
 
   vpc_security_group_ids = [

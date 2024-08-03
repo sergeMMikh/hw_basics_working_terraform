@@ -46,3 +46,7 @@ output "instances_info" {
   }
 }
 
+output "full_project_description" {
+  description = "Full project description including project name and owner"
+  value       = local.full_project_description
+}
