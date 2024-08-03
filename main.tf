@@ -10,18 +10,16 @@ resource "aws_instance" "platform" {
     volume_size = 8
   }
 
-  # subnet_id                   = aws_subnet.develop.id
   subnet_id                   = aws_default_subnet.primary.id
   associate_public_ip_address = true
 
-  # availability_zone = var.availability_zone
   availability_zone = data.aws_availability_zones.available.names[0]
 
-  tags = {
-    Name    = var.vm_web_name
-    Owner   = var.vm_web_owner
-    Project = var.vm_web_project
-  }
+  tags = merge(
+    var.vms_resources["web"],
+    var.metadata,
+    { full_project_description = local.full_project_description }
+  )
 
   vpc_security_group_ids = [
     aws_security_group.external_net.id,
@@ -45,18 +43,16 @@ resource "aws_instance" "netology-develop-platform-db" {
     volume_size = 8
   }
 
-  # subnet_id                   = aws_subnet.develop.id
   subnet_id                   = aws_default_subnet.secondary.id
   associate_public_ip_address = true
 
-  # availability_zone = var.availability_zone
   availability_zone = data.aws_availability_zones.available.names[1]
 
-  tags = {
-    Name    = var.vm_web_name
-    Owner   = var.vm_web_owner
-    Project = var.vm_web_project
-  }
+  tags = merge(
+    var.vms_resources["db"],
+    var.metadata,
+    { full_project_description = local.full_project_description }
+  )
 
   vpc_security_group_ids = [
     aws_security_group.external_net.id,
