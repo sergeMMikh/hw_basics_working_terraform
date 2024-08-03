@@ -53,7 +53,7 @@ resource "aws_instance" "netology-develop-platform-db" {
   availability_zone = data.aws_availability_zones.available.names[1]
 
   tags = {
-    Name    = var.vm_web_name
+    Name    = var.vm_web_db_name
     Owner   = var.vm_web_owner
     Project = var.vm_web_project
   }

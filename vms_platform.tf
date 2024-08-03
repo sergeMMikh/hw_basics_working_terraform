@@ -4,6 +4,12 @@ variable "vm_web_name" {
   default     = "netology-develop-platform-web"
 }
 
+variable "vm_web_db_name" {
+  type        = string
+  description = "The image name"
+  default     = "netology-develop-platform-db"
+}
+
 variable "vm_web_instance_type" {
   type        = string
   description = "The type of instance"
