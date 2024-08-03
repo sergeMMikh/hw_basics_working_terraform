@@ -319,5 +319,5 @@ test = [
     }
     ```
     
-Выражение в terraform console, которое позволит вычленить требуемую строку: ```var.test[0]["dev1"][0]</br>
+2. Выражение в terraform console, которое позволит вычленить требуемую строку: ```var.test[0]["dev1"][0]</br>
    <img src="images/Task_8_1.png" alt="Task_8_1.png" width="400" height="auto"></br>
