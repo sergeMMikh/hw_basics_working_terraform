@@ -137,10 +137,97 @@ lifecycle {
 
 **Решение**
 1. В файле locals.tf сделал переменную с полным описанием проека.
+```
+locals {
+  full_project_description = "Two instatnces ${var.vm_web_name} and ${var.vm_db_name} are rized by ${var.vm_web_owner} for the project ${var.vm_web_project}."
+}
+```
 2. Сделал для неё output
 3. Вывод значений команды ```terraform output```</br>
    <img src="images/Task_5_1.png" alt="Task_5_1.png" width="750" height="auto"></br>
    Описание проекта на странице инстанса AWS
    <img src="images/Task_5_2.png" alt="Task_5_2.png" width="750" height="auto"></br>
 
+-----
+### Задание 6
 
+1. Вместо использования трёх переменных  ".._cores",".._memory",".._core_fraction" в блоке  resources {...}, объедините их в единую map-переменную **vms_resources** и  внутри неё конфиги обеих ВМ в виде вложенного map(object).  
+   ```
+   пример из terraform.tfvars:
+   vms_resources = {
+     web={
+       cores=2
+       memory=2
+       core_fraction=5
+       hdd_size=10
+       hdd_type="network-hdd"
+       ...
+     },
+     db= {
+       cores=2
+       memory=4
+       core_fraction=20
+       hdd_size=10
+       hdd_type="network-ssd"
+       ...
+     }
+   }
+   ```
+3. Создайте и используйте отдельную map(object) переменную для блока metadata, она должна быть общая для всех ваших ВМ.
+   ```
+   пример из terraform.tfvars:
+   metadata = {
+     serial-port-enable = 1
+     ssh-keys           = "ubuntu:ssh-ed25519 AAAAC..."
+   }
+   ```  
+  
+5. Найдите и закоментируйте все, более не используемые переменные проекта.
+6. Проверьте terraform plan. Изменений быть не должно.
+
+------
+**Решение**
+1. Создал переменную *vms_resources* с описание характеристик виртуальных машин
+   ```(terrform)
+   variable "vms_resources" {
+      type = map(any)
+      default = {
+        web = {
+          Platform = "Ubuntu"
+          cores    = "1"
+          memory   = "1G"
+          hdd_size = "8G"
+          hdd_type = "gp2"
+        }
+        db = {
+          Platform = "Ubuntu"
+          cores    = "2"
+          memory   = "2G"
+          hdd_size = "8G"
+          hdd_type = "gp2"
+        }
+      }
+    }
+   ```
+3. Создал переменную *metadata*
+   ```(terrform)
+   variable "metadata" {
+      type = map(any)
+      default = {
+        Owner    = "SMMikh"
+        Project  = "hw_basics_working_terraform."
+        Platform = "Ubuntu"
+      }
+    }
+    ```
+4. Так как ранее я внёс в теги инстанса переменную *local* с описанием проекта, то решил просто смержить переменные в поле *tag*
+   ```(terrform)
+   tags = merge(
+    var.vms_resources["web"],
+    var.metadata,
+    { full_project_description = local.full_project_description }
+   )
+   ```
+5. По условиям задания я должен закоментировать все неиспользуемые теперь переменные, а именно те, что внесены в новые *map*. Однако я использую данные переменные в других ресурсах aws, включенных в проект. Например у меня есть таги в описании [*aws_security_group*](security_group.tf).
+6. Я имел неосторожность использовать данные из *tags* в [output](outputs.tf) потому вывод команды *terraform plan* написал мне изменение в *Changes to Outputs*.</br>
+   <img src="images/Task_6_1.png" alt="Task_6_1.png" width="350" height="auto"></br>
